@@ -3,12 +3,6 @@
     <div class="row">
         <!-- Blog Entries Column -->
         <div class="col-md-8">
-
-            <!-- <h1 class="page-header">
-                Page Heading
-                <small>Secondary Text</small>
-            </h1> -->
-
 <?php
             $result = null;
             if (isset($_POST["submit"])) {
@@ -24,19 +18,16 @@
             }
 
             if (isset($result)) {
-                if (mysqli_num_rows($result) > 0) {
-                    while ($row = mysqli_fetch_assoc($result)) {
-                        include "includes/post.php";
-                    }
-                } else {
-                    echo "<h1>No Result</h1>";
+                $i = 0;
+                while ($i < count($result)) {
+                    $row = $result[$i];
+                    include "includes/post.php";
+                    $i++;
                 }
-                mysqli_free_result($result);
             } else {
-                die("QUERY FAILURE" . mysqli_error($connection));
+                echo "<h1>No Result</h1>";
             }
 ?>
-
         </div>
         <!-- Blog Sidebar Widgets Column -->
         <?php include "includes/sidebar.php"; ?>
