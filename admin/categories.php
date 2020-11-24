@@ -41,7 +41,7 @@
 ?>
                                         <tr>
                                             <!-- <th scope="row"><?php echo $row["cat_id"]; ?></th> -->
-                                            <th scope="row"><?php echo ++$i; ?></th>
+                                            <td scope="row"><?php echo ++$i; ?></td>
                                             <td><?php echo $row["cat_title"]; ?></td>
                                             <td><a href="?delete=<?php echo $row["cat_id"]; ?>" onclick="return confirm('Are you sure you want to delete?');">Delete</a></td>
                                             <td><a href="?edit=<?php echo $row["cat_id"]; ?>&title=<?php echo $row["cat_title"]; ?>">Edit</a></td>

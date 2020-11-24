@@ -62,41 +62,42 @@
                 while ($row = mysqli_fetch_assoc($result)) {
 ?>
                     <tr>
-                        <th scope="row">
+                        <td scope="row">
                             <input type="checkbox" class="selectPost" name="post_selection[]" value="<?php echo $row["post_id"]; ?>">
-                        </th>
-                        <!-- <th scope="row"><?php echo $row["post_id"]; ?></th> -->
-                        <th scope="row"><?php echo ++$i; ?></th>
-                        <th scope="row"><?php echo $row["post_author"]; ?></th>
-                        <th scope="row"><?php echo $row["post_title"]; ?></th>
-                        <th scope="row"><?php echo $row["cat_title"]; ?></th>
-                        <th scope="row"><?php echo $row["post_status"]; ?></th>
-                        <th scope="row">
+                        </td>
+                        <!-- <td scope="row"><?php echo $row["post_id"]; ?></td> -->
+                        <td scope="row"><?php echo ++$i; ?></th>
+                        <td scope="row"><?php echo $row["post_author"]; ?></td>
+                        <td scope="row"><?php echo $row["post_title"]; ?></td>
+                        <td scope="row"><?php echo $row["cat_title"]; ?></td>
+                        <td scope="row"><?php echo $row["post_status"]; ?></td>
+                        <td scope="row">
                             <img src="../images/<?php echo $row["post_image"]; ?>" alt="<?php echo $row["post_image"]; ?>" width="100">
-                        </th>
-                        <th scope="row"><?php echo $row["post_tags"]; ?></th>
+                        </td>
+                        <td scope="row"><?php echo $row["post_tags"]; ?></td>
 <?php
                         if ($post_comment_result = getCommentsByPost($row["post_id"])) {
                             $post_comment_count = mysqli_num_rows($post_comment_result);
                         }
 ?>
-                        <th scope="row">
+                        <td scope="row">
                             <a href="comments.php?source=view_post_comments&id=<?php echo $row["post_id"]; ?>">
-                                <?php echo $post_comment_count; ?></th>
+                                <?php echo $post_comment_count; ?>
                             </a>
-                        <th scope="row"><?php echo $row["post_date"]; ?></th>
-                        <th scope="row">
+                        </td>
+                        <td scope="row"><?php echo $row["post_date"]; ?></td>
+                        <td scope="row">
                             <a href="posts.php?publish=<?php echo $row["post_id"]; ?>">Publish</a>
-                        </th>
-                        <th scope="row">
+                        </td>
+                        <td scope="row">
                             <a href="../post.php?id=<?php echo $row["post_id"]; ?>">Go</a>
-                        </th>
-                        <th scope="row">
+                        </td>
+                        <td scope="row">
                             <a href="posts.php?source=edit_posts&id=<?php echo $row["post_id"]; ?>">Edit</a>
-                        </th>
-                        <th scope="row">
+                        </td>
+                        <td scope="row">
                             <a href="posts.php?delete=<?php echo $row["post_id"]; ?>" onclick="return confirm('Are you sure you want to delete?');">Delete</a>
-                        </th>
+                        </td>
                     </tr>
 <?php
                 }
