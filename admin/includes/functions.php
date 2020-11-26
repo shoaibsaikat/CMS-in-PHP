@@ -160,8 +160,35 @@ function getPublishedPostsByCatagory($cat_id) {
 
 function getPublishedPostsByTag($tag) {
     global $connection;
-    $query = "SELECT * FROM posts WHERE post_tags LIKE '%$tag%' AND post_status = 'published'";
-    if ($result = mysqli_query($connection, $query))
+    $status = 'published';
+
+    $stmt = mysqli_prepare($connection, "SELECT post_id, post_title, post_author, post_tags,
+                                            post_status, post_content, post_image, post_date, post_category_id
+                                            FROM posts
+                                            WHERE post_tags LIKE ? AND post_status = 'published'");
+
+    $param = "%{$tag}%";
+    mysqli_stmt_bind_param($stmt, 's', $param);
+    mysqli_stmt_execute($stmt);
+    mysqli_stmt_bind_result($stmt, $post_id, $post_title, $post_author, $post_tags,
+    $post_status, $post_content, $post_image, $post_date, $post_category_id);
+
+    $i = 0;
+    while (mysqli_stmt_fetch($stmt)) {
+        $result[$i]['post_id'] = $post_id;
+        $result[$i]['post_title'] = $post_title;
+        $result[$i]['post_author'] = $post_author;
+        $result[$i]['post_tags'] = $post_tags;
+        $result[$i]['post_status'] = $post_status;
+        $result[$i]['post_content'] = $post_content;
+        $result[$i]['post_image'] = $post_image;
+        $result[$i]['post_date'] = $post_date;
+        $result[$i]['post_category_id'] = $post_category_id;
+
+        $i++;
+    }
+
+    if (isset($result))
         return $result;
     return null;
 }
